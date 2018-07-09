@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}添加VIP{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+                {% if state == 'success' %}
+                    <div class="well">
+                        <h3 class="text-success text-center">添加成功!</h3>
+                    </div>
+                {% endif %}
+                <form method="POST" role="form" class="form-horizontal">
+                    <h4 class="form-signin-heading text-left" style="margin-left:20px;">&nbsp&nbsp&nbsp&nbsp&nbsp 添加VIP:</h4>
+
+                    <div class="form-group">
+                        <label for="id_vip" class="col-md-3 control-label">VIP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_vip_ip" required name="vip_ip" autofocus>
+                            <div style="color: #FF0000">{{ msg }}</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_vip" class="col-md-3 control-label">VIP_PORT:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_vip_port" required name="vip_port" autofocus>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                         <label for="id_role" class="col-md-3 control-label">lvs模式:</label>
+                        <div class="col-md-9">
+                            <select class="form-control" required name="vip_mode" id="id_vip_mode">
+                                <option value="DR">DR</option>
+                                <option value="FNAT">FNAT</option>
+                                <option value="l7_HA">l7_HA</option>
+                                <option value="l7_SSL">l7_SSL</option>
+                                <option value="l7_NGINX">l7_NGINX</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_vip_groupname" class="col-md-3 control-label">集群组名:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_vip_groupname" required name="vip_groupname" autofocus>
+                            <div style="color: #FF0000">{{ msg1 }}</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_vip_masterhostname" class="col-md-3 control-label">主lvsIP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_vip_masterhostname" required name="vip_masterhostname" autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_vip_slavehostname" class="col-md-3 control-label">备lvsIP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_vip_slavehostname" required name="vip_slavehostname" autofocus>
+                            <div style="color: #FF0000">{{ msg2 }}</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_app_name" class="col-md-3 control-label">业务名称:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_app_name" required name="app_name" autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_app_owner" class="col-md-3 control-label">VIP负责人邮箱前缀:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_app_owner" required name="app_owner" autofocus>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_rt_number" class="col-md-3 control-label">RT提案编号:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_rt_number" required name="rt_number" autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_idc" class="col-md-3 control-label">所属机房:</label>
+                        <div class="col-md-9">
+                           <!-- <input type="text" class="form-control" required name="idc" id="id_idc">
+                           -->
+                            <select class="form-control" required name="idc" id="id_idc">
+                                <option value="YF" data-key="YF">B北京-电信-永丰</option>
+                                <option value="JA" data-key="JA">B北京-电信-静安</option>
+                                <option value="FT" data-key="FT">B北京-移动-丰台</option>
+                                <option value="YHG" data-key="YHG">B北京-移动-雍和宫</option>
+                                <option value="YZ" data-key="YZ">B北京-联通-亦庄</option>
+                                <option value="BX" data-key="BX">B北京-联通-北显</option>
+                                <option value="TC" data-key="TC">B北京-联通-土城</option>
+                                <option value="XD" data-key="XD">B北京-联通-西单</option>
+                                <option value="QXG" data-key="QXG">G广州-电信-七星岗</option>
+                                <option value="SHX" data-key="SHX">G广州-电信-沙溪</option>
+                                <option value="NFJD" data-key="NFJD">G广州-移动-南方基地</option>
+                                <option value="KXC" data-key="KXC">G广州-联通-科学城</option>
+                                <option value="HYDS" data-key="HYDS">X香港-和记环球-和域大厦</option>
+                                <option value="SE" data-key="SE">B北京-教育网-赛尔</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                         <label for="id_online" class="col-md-3 control-label">是否在线:</label>
+                        <div class="col-md-9">
+                            <select class="form-control" required name="online" id="id_online">
+                                <option value="YES">YES</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-4">
+                            <button class="btn btn btn-primary btn-block" type="submit">提交</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

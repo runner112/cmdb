@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}查看服务器{% endblock %}
+
+<style type="text/css"> 
+.AutoNewline 
+{ 
+  Word-break: break-all;/*必须*/ 
+} 
+</style> 
+
+
+{% block content %}
+
+    <div class="container">
+        <div style="margin-right: 1200px;margin-left: -15px;">
+            <div class="col-md-10 col-md-offset-1">
+               
+                <div class="col-md-9 col-md-offset-1">
+                    <!--<div class="col-md-4 col-md-offset-8">-->
+                    <div class="col-lg-6 col-center-block">
+                        <form role="form" method="post" name="search_form"> 
+                            {% csrf_token %}
+                            <div style="align:right" class="input-group">
+                             <input type="search" style="width:330px;align:right" text-align:center class="form-control" name="keyword" placeholder="请输入要查询的服务器关键信息" id="id_search_input"  autofocus>
+                             <span class="input-group-btn">
+                               <button class="btn btn-search btn-primary">Search</button> 
+                               <!--<button class="btn btn-default btn-primary" type="button">Search</button>-->
+                             </span>
+                            </div>
+                        <br/>  
+                        </form>
+                    </div>
+                    <script type="text/javascript">
+                        function key_up() {
+                            var old_value = $('#id_search_input').val();
+                            setTimeout(function () {
+                                var new_value = $('#id_search_input').val();
+                                if (old_value == new_value) {
+                             document.search_form.submit();
+                                }
+                            }, 1500);
+                        }
+                    </script>
+                  <div style=" float:left; width:100%; height:35px;"></div>
+                    <!--<div class="table-responsive">-->
+                    <div style="margin:auto;width:900px">
+                    <br />
+                    <!--{ load pagination_tags %}-->                                     
+                    <!--{ autopaginate server_list %}-->                                              
+                      <table align="center" border="2" bgcolor="#00FF00" bordercolor="#D2E9FF" style="white-space:nowrap;align:center;text-align:center;background-color:#F0F0F0" class="table table-hover table-striped">
+                        <thead style="white-space:nowrap;align:center;text-align:center">
+                        <tr style="white-space:nowrap;align:center;text-align:center">
+                            <th style="white-space:nowrap;text-align:center">主机名称</th>
+                            <th style="white-space:nowrap;text-align:center">盘点号</th>
+                            <th style="white-space:nowrap;text-align:center">外网IP</th>
+                            <th style="white-space:nowrap;text-align:center">内网IP</th>
+                            <th style="white-space:nowrap;text-align:center">管理IP</th>
+                            <th style="white-space:nowrap;text-align:center">业务角色</th>
+                            <th style="white-space:nowrap;text-align:center">所属机房</th>
+                            <th style="white-space:nowrap;text-align:center">是否在线</th>
+                            <th style="white-space:nowrap;text-align:center">bond带宽</th>
+                            <th style="white-space:nowrap;text-align:center">所属分组</th>
+                            <th style="width:10px;word-break:break-all;white-space:nowrap;text-align:center">备注信息</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for server in server_list %}
+                            <tr>
+                                <td style="width:10px;word-break:break-all">{{ server.server_name }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.pnb }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.wip }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.nip }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.gip }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.role }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.idc }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.online }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.bondwidth }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.server_groupname }}</td>
+                                <td style="width:10px;word-break:break-all">{{ server.mark }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td style="color:red">暂无该server信息</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                     </table>
+                     <!--{ paginate %}-->
+                    <div class="row">
+                        <ul class="pager">
+                            {% if server_list.has_previous %}
+                                <li class="previous">
+                                  <a href="?page={{ server_list.previous_page_number }}&keyword={{ keyword }}">上一页</a>
+                                </li>
+                            {% else %}
+                                <li class="previous disabled"><a href="#">上一页</a></li>
+                            {% endif %}
+
+                            <span>第 {{ server_list.number }}页/共 {{ server_list.paginator.num_pages }} 页</span>
+
+                            <!--
+                            { for page in server_list.paginator.page_range %}
+                               { if page = server_list.number %}
+                                 <a class='paginator_current'><span>{ page }}</span></a>
+                               { else %}
+                                 <a class='paginator' href='?page={ page }}'><span>{ page }}</span></a>
+                               { endif %}
+                            { endfor %}
+                            -->
+
+                             <!-- server_list.number server_list.paginator.num_pages -->
+                            <!--第 { widthratio server_list.number server_list.paginator.num_pages 1 %} 页-->
+                                {% if server_list.has_next %}
+                                <li class="next">
+                                  <a href="?page={{ server_list.next_page_number }}&keyword={{ keyword }}">下一页</a>
+                                </li>
+                            {% else %}
+                                <li class="next disabled"><a href="#">下一页</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+                    </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}添加server{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+                {% if state == 'success' %}
+                    <div class="well">
+                        <h3 class="text-success text-center">添加成功!</h3>
+                    </div>
+                {% endif %}
+                <form method="POST" role="form" class="form-horizontal">
+                    {% csrf_token %}
+                    <h4 class="form-signin-heading text-left" style="margin-left:20px;">添加server:</h4>
+
+                    <div class="form-group">
+                        <label for="id_server_name" class="col-md-3 control-label">HostName:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_server_name" required name="server_name" autofocus>
+                        <div style="color: #FF0000">{{ msg }}</div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_server_groupname" class="col-md-3 control-label">集群组名:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="server_groupname" id="id_server_groupname">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_pnb" class="col-md-3 control-label">盘点号:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="pnb" id="id_pnb">
+                        <div style="color: #FF0000">{{ msg4 }}</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_wip" class="col-md-3 control-label">外网IP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="wip" id="id_wip">
+                        <div style="color: #FF0000">{{ msg1 }}</div>
+                        <div style="color: #FF0000">{{ msg5 }}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_nip" class="col-md-3 control-label">内网IP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="nip" id="id_nip">
+                        <div style="color: #FF0000">{{ msg2 }}</div>
+                        <div style="color: #FF0000">{{ msg6 }}</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_gip" class="col-md-3 control-label">管理IP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="gip" id="id_gip">
+                        <div style="color: #FF0000">{{ msg3 }}</div>
+                        <div style="color: #FF0000">{{ msg7 }}</div>
+                        </div> 
+                    </div>
+
+                    <div class="form-group">
+                         <label for="id_role" class="col-md-3 control-label">业务角色:</label>
+
+
+                        <div class="col-md-9">
+                        <!--    <input type="text" class="form-control" required name="role" id="id_role">
+                        -->
+                            <select class="form-control" required name="role" id="id_role">
+                                <option value="LVS">LVS</option>
+                                <option value="HA">HA</option>
+                                <option value="SSL">SSL</option>
+                                <option value="HL">HL</option>
+                                <option value="Nginx">Nginx</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_idc" class="col-md-3 control-label">所属机房:</label>
+                        <div class="col-md-9">
+                           <!-- <input type="text" class="form-control" required name="idc" id="id_idc">
+                           -->
+                            <select class="form-control" required name="idc" id="id_idc">
+                                <option value="YF" data-key="YF">B北京-电信-永丰</option>
+                                <option value="JA" data-key="JA">B北京-电信-静安</option>
+                                <option value="FT" data-key="FT">B北京-移动-丰台</option>
+                                <option value="YHG" data-key="YHG">B北京-移动-雍和宫</option>
+                                <option value="YZ" data-key="YZ">B北京-联通-亦庄</option>
+                                <option value="BX" data-key="BX">B北京-联通-北显</option>
+                                <option value="TC" data-key="TC">B北京-联通-土城</option>
+                                <option value="XD" data-key="XD">B北京-联通-西单</option>
+                                <option value="QXG" data-key="QXG">G广州-电信-七星岗</option>
+                                <option value="SHX" data-key="SHX">G广州-电信-沙溪</option>
+                                <option value="NFJD" data-key="NFJD">G广州-移动-南方基地</option>
+                                <option value="KXC" data-key="KXC">G广州-联通-科学城</option>
+                                <option value="HYDS" data-key="HYDS">X香港-和记环球-和域大厦</option>
+                                <option value="SE" data-key="SE">B北京-教育网-赛尔</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_online" class="col-md-3 control-label">是否在线(Y or N)：</label>
+                        <div class="col-md-9">
+                        <!--    <input type="text" class="form-control" required name="online" id="id_online">
+                        -->
+                        <select  class="form-control" required  name="online" id="id_online">
+                            <option value="Y">Y</option>
+                            <option value="N">N</option>
+                        </select>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_bondwidth" class="col-md-3 control-label">网卡bond带宽(G)：</label>
+                        <div class="col-md-9">
+                            <!--<input type="text" class="form-control" required name="bondwidth" id="id_bondwidth">
+                            -->
+                            <select class="form-control" required name="bondwidth" id="id_bondwidth">
+                                <option value="10G">10G</option>
+                                <option value="4G">4G</option>
+                                <option value="2G">2G</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_mark" class="col-md-3 control-label">业务分类备注：</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="mark" id="id_mark">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-4">
+                            <button class="btn btn btn-primary btn-block" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

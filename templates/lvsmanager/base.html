@@ -1,0 +1,298 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+<!--   
+     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+-->
+<!--
+   <link rel="stylesheet" href="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+   <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+   <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+-->
+    <link href="http://10.75.26.82:8282/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://10.75.26.82:8282/bootstrap/dist/css/bootstrap-submenu.css" rel="stylesheet" />
+    <script src="http://10.75.26.82:8282/bootstrap/js/jquery.min.js"></script>
+    <script src="http://10.75.26.82:8282/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://10.75.26.82:8282/bootstrap/dist/js/bootstrap-submenu.min.js"></script>
+<!--
+    <style type="text/css">
+
+     @import url(/static/css/base.css);
+
+    </style>
+-->
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#open2").mouseover(function(){
+    $("#open2").addClass("open");
+  });
+  $("#open2").mouseleave(function(){
+    $("#open2").removeClass("open");
+  });
+  $("#open1").mouseover(function(){
+    $("#open1").addClass("open");
+  });
+  $("#open1").mouseleave(function(){
+    $("#open1").removeClass("open");
+  });
+});
+</script>
+
+
+<style type="text/css">
+
+.body {
+    padding-top: 50px;
+    background-color: #eeeeee;
+}
+
+#header-base {
+    background-color: #000;
+    color: #fff;
+}
+
+#base_name {
+    color: #fff;
+    font-weight: bold;
+}
+
+.fancy td {
+        color: #f60;
+        background: #666;
+        }
+
+.img-responsive {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  background-color: #ccffff
+}
+
+a:hover,
+a:focus {
+  color: #2a6496;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+
+.dropdown-menu li > p:hover, 
+.dropdown-menu .active > p, 
+.dropdown-menu .active > p:hover {
+  text-decoration: none;
+  background-image: none;
+  background-color: #eee;
+  color: #333;
+  filter:none;
+}
+
+
+</style>
+
+<script language="javascript"> 
+ function clear(){ 
+   Source=document.body.firstChild.data; 
+   document.open(); 
+   document.close(); 
+   document.body.innerHTML=Source; 
+ }
+
+// function uclick(){
+//   if(event.button==2){
+//   alert('test');
+   //window.event.retunValue=false;
+// }}
+// document.onmousedown=uclick;
+ //document.oncontextmenu=uclick; 
+</script> 
+
+</head>
+<!--<body>-->
+<body oncontextmenu="window.event.returnValue=false" onselectstart="return false">
+<noscript><iframe src=""></iframe></noscript>
+<!--
+<style type="text/css">
+
+     @import"/usr/local/nginx/html/lbadmin/lvsmanager/static/css/base.css";
+
+</style>
+-->
+
+<script language="javascript">$('[data-submenu]').submenupicker();</script>
+
+<pre><code class="hljs javascript">$('[data-submenu]').submenupicker();</code></pre>
+
+<!--<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">-->
+<nav class="navbar navbar-inverse navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container" width="900px">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse-basepage">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{% url 'homepage' %}" class="navbar-brand">首页</a>
+            <a href="{% url 'login' %}" class="navbar-brand">登陆</a>
+            <a href="{% url 'logout' %}" class="navbar-brand">退出</a>
+            <a href="{% url 'signup' %}" class="navbar-brand">注册</a>
+            <!--<a href="{\% url 'cmd' %}" class="navbar-brand">运行</a>-->
+        </div>
+
+        <!--<div class="collapse navbar-collapse glyphicon glyphicon-align-left" id="navbar-collapse-basepage">-->
+        <div width="900px" class="collapse navbar-collapse" id="navbar-collapse-basepage">
+            <ul class="nav navbar-nav navbar-fixed-right" role="navigation" width="900px">
+                {% if user.myuser.permission > 1 %}
+                    <li id="add_server"><a href="{% url 'add_server' %}">添加服务器信息</a></li>
+                    <li id="add_vip"><a href="{% url 'add_vip' %}">添加VIP信息</a></li>
+                    <!--<li id="cmd"><a href="{\% url 'ansible' %}">ansible配置管理</a><li>-->
+                    
+                    <div class="btn-group">
+                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="margin-top:10px;margin-left:18px;"> 
+                      LVS配置管理
+                      <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu">
+                      <li><a href="#">永丰机房</a></li>
+                      <li><a href="#">土城机房</a></li>
+                      <li><a href="#">雍和宫机房</a></li>
+                      <li><a href="#">灰度下发</a></li>
+                    </div>
+
+                    <div class="btn-group">
+                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-submenu style="margin-top:10px;margin-left:18px;">
+                      七层配置管理
+                      <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                      <li id="open1" class="dropdown-submenu">
+                       <a style="color:#3399FF" tabindex="-1">Tengine配管相关</a>
+                       <ul class="dropdown-menu">
+                        <li style="background-color:#ECF5FF"><a href="/layer7?idc=main/l7_main_yf">主站永丰</a></li>
+                        <li style="background-color:#ECF5FF"><a href="/layer7?idc=main/l7_main_tc">主站土城</a></li>
+                        <li style="background-color:#ECF5FF"><a href="/layer7?idc=main/l7_main_edu">主站教育网</a></li>
+                        <li class="divider"></li>
+                        <li style="background-color:#F0FFF0"><a href="/layer7?idc=huati/l7_huati_tc">话题土城</a></li>
+                        <li style="background-color:#F0FFF0"><a href="/layer7?idc=huati/l7_huati_yf">话题永丰</a></li>
+                        <li class="divider"></li>
+                        <li style="background-color:#F3F3FA"><a href="/layer7?idc=hongbao/l7_hongbao_tc">红包土城</a></li>
+                        <li style="background-color:#F3F3FA"><a href="/layer7?idc=hongbao/l7_hongbao_yf">红包永丰</a></li>
+                       </ul>
+                      </li>
+                      <li class="divider backcolor"></li>
+                      <li id="open2" class="dropdown-submenu">
+                       <a style="color:#3399FF" tabindex="-1">HA配管相关</a>
+                       <ul class="dropdown-menu">
+                        <li><a href="#">永丰机房</a></li>
+                        <li><a href="#">土城机房</a></li>
+                        <li><a href="#">北显机房</a></li>
+                        <li><a href="#">雍和宫机房</a></li>
+                        <li><a href="#">丰台机房</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">南方基地机房</a></li>
+                        <li><a href="#">沙溪机房</a></li>
+                        <li><a href="#">科学城机房</a></li>
+                        <li><a href="#">七星岗机房</a></li>
+                       </ul>
+                      </li>
+                    </div>
+
+                    <div class="btn-group">
+                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="margin-top:10px;margin-left:18px;">
+                      SSL配置管理
+                      <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu">
+                      <li><a href="#">永丰机房</a></li>
+                      <li><a href="#">土城机房</a></li>
+                      <li><a href="#">雍和宫机房</a></li>
+                      <li><a href="#">灰度下发</a></li>
+                    </div>
+                    <!--
+                    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1"data-toggle="dropdown">
+                     ansible配置管理
+                     <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                     <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="#">LVS配管</a>
+                     </li>
+                     <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="#">HA配管</a>
+                     </li>
+                     <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="#">SSL配管</a>
+                     </li>
+                     <li role="presentation" class="divider"></li>
+                     <li role="presentation">
+                      <a role="menuitem" tabindex="-1" href="#">其余配管</a>
+                     </li>
+                     -->
+                {% endif %}
+                {% if user %}
+                 <!--<li id="view_server"><a href="{% url 'view_server' %}">查看服务器信息</a></li>-->
+                 <div class="btn-group">
+                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="margin-top:10px;margin-left:18px;">
+                      信息查询
+                      <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu">
+                      <li><a style="color:#3399FF" href="{% url 'view_server' %}">服务器信息查询</a></li>
+                      <li class="divider"></li>
+                      <li><a style="color:#3399FF" href="#">VIP信息查询</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">其它信息查询</a></li>
+                    </div>
+                {% endif %}
+            </ul>
+            <!--<ul class="nav navbar-nav navbar-right">-->
+            <ul class="nav navbar-nav navbar-right" width="30px">
+                {% if user %}
+                    <li><p class="navbar-text">欢迎&nbsp;&nbsp;<span id="base_name">{{ user.myuser.nickname }}</span></p>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<!-- /nav -->
+<!-- header -->
+<!--<header class="jumbotron subhead" id="header-base">-->
+<header>
+    <div class="jumbotron">
+        <h2 style="color:#3399FF"><font size=6>负载均衡信息管理系统</font><font color=#4F4F4F size=2>---使用Chrome浏览器体验会更好 :)</font></h2>
+    </div>
+</header>
+<!-- main part -->
+{% block content %}{% endblock %}
+<!-- /.main -->
+
+<!-- footer -->
+<footer class="footer" role="contentinfo">
+    <hr>
+    <div class="container">
+        <h4 class="text-center"> @2017&nbsp;&nbsp;WeiBo_LB</h4>
+    </div>
+</footer>
+<!-- /.footer-->
+<script type="text/javascript">
+    $('#{{active_menu}}').addClass("active");
+</script>
+</body>
+</html>

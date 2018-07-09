@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}添加server{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+                {% if state == 'success' %}
+                    <div class="well">
+                        <h3 class="text-success text-center">添加成功!</h3>
+                    </div>
+                {% endif %}
+                <form method="POST" role="form" class="form-horizontal">
+                    {% csrf_token %}
+                    <h4 class="form-signin-heading text-left" style="margin-left:20px;">添加server:</h4>
+
+                    <div class="form-group">
+                        <label for="id_server_name" class="col-md-3 control-label">HostName:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="id_server_name" required name="server_name" autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_pnb" class="col-md-3 control-label">盘点号:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="pnb" id="id_pnb">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_wip" class="col-md-3 control-label">外网IP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="wip" id="id_wip">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="id_nip" class="col-md-3 control-label">内网IP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="nip" id="id_nip">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_gip" class="col-md-3 control-label">管理IP:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="gip" id="id_gip">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_role" class="col-md-3 control-label">业务角色:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="role" id="id_role">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_idc" class="col-md-3 control-label">所属机房:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="idc" id="id_idc">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_online" class="col-md-3 control-label">是否在线(Y or N)：</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="online" id="id_online">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_bondwidth" class="col-md-3 control-label">网卡bond带宽(G)：</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="bondwidth" id="id_bondwidth">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_mark" class="col-md-3 control-label">业务方备注：</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" required name="mark" id="id_mark">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4 col-md-offset-4">
+                            <button class="btn btn btn-primary btn-block" type="submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
